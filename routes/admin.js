@@ -11,7 +11,8 @@ route.post('/add-product', (req, res)=>{
 })
 
 route.get('/add-product', (req, res)=>{
-    res.render('add-product', {title: 'add-product'})
+    res.render('add-product', {title: 'add-product',
+                                path: '/add-product'})
 })
 
 module.exports = {

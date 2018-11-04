@@ -10,9 +10,9 @@ html(lang="en")
         header.header
             nav.header__nav
                 ul.header__nav-list
-                    li.header__nav-item
+                    li.header__nav-item(class = {'active': path === '/'})
                         a.header__nav-link(href="/") shop
-                    li.header__nav-item
+                    li.header__nav-item(class = {'active': path === '/add-product'})
                         a.header__nav-link(href="/add-product") add product
 
         block content
