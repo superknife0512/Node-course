@@ -8,13 +8,21 @@
 .active a {
   color: #fdcc47 !important; }
 
+.error {
+  padding: 50px; }
+
 *, *::after, *::before {
   padding: 0;
   margin: 0;
   box-sizing: border-box; }
 
+ul {
+  margin: 0;
+  padding: 0; }
+
 body {
-  font-family: 'Open Sans', sans-serif; }
+  font-family: 'Open Sans', sans-serif;
+  margin-bottom: 3rem; }
 
 .header {
   background-color: #b93869; }

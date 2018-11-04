@@ -4,7 +4,7 @@ const path = require('path')
 
 const adminRoute = require('./routes/admin');
 const shopRoute = require('./routes/shop');
-const productController = require('./controllers/productsCtrl')
+const render404Page = require('./controllers/404Ctrl');
 
 const app = express();
 
@@ -19,6 +19,6 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 // adding 404 brain not found
-app.use(productController.render404Page)
+app.use(render404Page)
 
 app.listen(8080);

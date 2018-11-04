@@ -1,28 +1,30 @@
-const products = [];
+
+const Product = require('../models/Products');
 
 const addProduct = (req, res)=>{
-    products.push({'title': req.body.title})
+    const product = new Product(req.body.title)
+    product.addProduct();
     res.redirect('/');
 }
 
-const getAddProduct = (req, res)=>{
+const renderProduct = (req, res)=>{
     res.render('add-product', {title: 'add-product',
                                 path: '/add-product'})
 }
 
 const renderProducts = (req,res,next)=>{
-    res.render('shop', {products,
-                        title: 'Online shop',
-                        path:'/'});
+    Product.getProducts((products)=>{
+
+        res.render('shop', {products,
+                            title: 'Online shop',
+                            path:'/'});
+    });
 }
 
-const render404Page = (req,res,next)=>{
-    res.status(404).render('404err', {title: '404 Error!', path: ''})
-}
+
 
 module.exports = {
     addProduct,
-    getAddProduct,
+    renderProduct,
     renderProducts,
-    render404Page
 }

@@ -6,10 +6,13 @@
     <%-include('./includes/navigation') %>
 
     <main>
-        <form action="/add-product" method="POST" class="form">
-            <h3>Add your file</h3>
-            <input type="text" name="title" class="form__product" placeholder="adding something">
-            <input type="submit" class="form__btn">
-        </form>
+        <div class="container">
+        
+            <form action="/add-product" method="POST" class="form" >
+                <h3>Add your file</h3>
+                <input type="text" name="title" class="form__product" placeholder="adding something">
+                <input type="submit" class="form__btn">
+            </form>
+        </div>
     </main>
     <%-include('./includes/end') %>
