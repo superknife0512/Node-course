@@ -23,9 +23,12 @@ body{
         margin-right: 3rem;
     }
     &__nav-link{
-        text-decoration: none;
-        text-transform: uppercase;
-        color: white;
+        &:link, &:visited{
+
+            text-decoration: none;
+            text-transform: uppercase;
+            color: white;
+        }
     }
     &__nav-link:hover{
         color: rgb(240, 190, 98);

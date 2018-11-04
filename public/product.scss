@@ -1,8 +1,7 @@
 .product{
     margin-top: 3rem;
-    width: 70%;
     display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(250px,350px));
+    grid-template-columns: repeat(auto-fit, minmax(250px,320px));
     justify-content: center;
     grid-column-gap: 40px;
     grid-row-gap: 60px;
@@ -39,7 +38,7 @@
 
     }
     &__card-btn{
-        padding: 10px 20px;
+        padding: 7px 15px;
         background-color: transparent;
         border: 1px solid $primary-color;
         border-radius: 4px;

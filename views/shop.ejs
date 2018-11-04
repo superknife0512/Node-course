@@ -1,0 +1,36 @@
+
+<%-include('./includes/header.ejs') %>
+
+</head>
+
+<body>
+    
+<%-include('./includes/navigation.ejs') %>
+
+    <main>
+        <% if(products.length > 0) {%>
+        <div class="product container">
+            <% products.forEach(product=>{ %>
+            <div class="product__card">
+                <h4 class="product__card-title">
+                    <%=product.title %>
+                </h4>
+                <img src="https://bom.to/7MUpD" alt="card" class="product__card-img">
+                <div class="product__info">
+                    <h3 class="product__card-price">$19.99</h3>
+                    <p class="product__card-content">
+                        it's a very awesome book about people on the islands
+                    </p>
+                    <button class="product__card-btn">Add to card</button>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+        <% } else { %>
+            <h1 class="title--warning">
+                there is no product here
+            </h1>
+        <% } %>
+    </main>
+
+<%-include('./includes/header.ejs') %>
