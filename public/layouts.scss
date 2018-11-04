@@ -1,0 +1,72 @@
+*,*::after, *::before{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.header{
+    background-color: #b93869;    
+    &__nav{
+        padding: 30px 50px;
+    }
+    &__nav-list{
+        display: flex;
+    }
+    &__nav-item{
+        list-style: none;
+    }
+    &__nav-item:not(:last-child){
+        margin-right: 3rem;
+    }
+    &__nav-link{
+        text-decoration: none;
+        text-transform: uppercase;
+        color: white;
+    }
+    &__nav-link:hover{
+        color: rgb(240, 190, 98);
+    }
+}
+.content{
+    padding: 30px 50px;
+    &__title{
+        text-transform: capitalize;
+        color: #b93869;
+        font-size: 30px;
+    }
+    &__text{
+        font-size: 16px;
+        color: #333;
+    }
+}
+
+/* add product section */
+.form{
+    padding: 30px 50px;
+    
+    & h3{
+        color: #444
+    }
+    &__product{
+        padding: 8px;
+        color: #555;
+        margin-top: 15px;
+        border-radius: 5px;
+        border: 1px solid #a7a7a7;
+    }
+    &__btn{
+        padding: 10px 20px;
+        color: white;
+        background-color: #b93869;
+        transition: all .3s;
+        border: none;
+        border-radius: 4px;
+    }
+    &__btn:hover{
+        background-color: #ee7fa9;
+    }
+}

@@ -19,7 +19,7 @@ app.set('views', 'views');
 
 // adding 404 brain not found
 app.use((req,res,next)=>{
-    res.status(404).sendFile(path.join(__dirname, 'views', '404err.html'))
+    res.status(404).render('404err', {title: '404 Error!'})
 })
 
 app.listen(8080);

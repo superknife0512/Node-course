@@ -1,0 +1,60 @@
+.product{
+    margin-top: 3rem;
+    width: 70%;
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(250px,350px));
+    justify-content: center;
+    grid-column-gap: 40px;
+    grid-row-gap: 60px;
+
+    &__card{
+        background-color: white;
+        box-shadow: .5rem .5rem 3rem rgba($color: #000000, $alpha: .2);
+    }
+    &__card-title{
+        color: $primary-color;
+        text-transform: capitalize;
+        font-size: 1.8rem;
+        font-weight: 100;
+        display: flex;
+        justify-content: center;
+        margin: .5rem 0;
+    }
+    &__card-img{
+        height: 300px;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+    &__card-price{
+        font-size: 1.5rem;
+        color: #444;
+        font-weight: 200;
+        margin-bottom: .7rem;
+    }
+    &__card-content{
+        text-align: center;
+        color: #333;
+        margin-bottom: .7rem;
+
+    }
+    &__card-btn{
+        padding: 10px 20px;
+        background-color: transparent;
+        border: 1px solid $primary-color;
+        border-radius: 4px;
+        transition: all .2s;
+        cursor: pointer;
+
+        &:hover{
+            background-color: $primary-color;
+            color: white;
+        }
+    }
+    &__info{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 1rem;
+    }
+}

@@ -1,29 +1,20 @@
-<!DOCTYPE html>
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        meta(http-equiv="X-UA-Compatible", content="ie=edge")
-        title #{title}
-        link(rel="stylesheet", href="/css/style.css")
-    body
-        header.header
-            nav.header__nav
-                ul.header__nav-list
-                    li.header__nav-item
-                        a.header__nav-link(href="/") shop
-                    li.header__nav-item
-                        a.header__nav-link(href="/add-product") add product
-        main
-            if products.length > 0
-                .product
-                    each product in products
-                        .product__card
-                            h4.product__card-title #{product.title}
-                            img.product__card-img(src="https://bom.to/7MUpD", alt="img")
-                            .product__info
-                                h3.product__card-price $19.99
-                                p.product__card-content it's a very awesome book about people on the islands
-                                button.product__card-btn add to card
-            else 
-                h3 there is no product here
+extends ./layouts/main-layout.pug
+
+block style
+    link(rel="stylesheet", href="/css/style.css")
+block content
+    main
+        if products.length > 0
+            .product
+                each product in products
+                    .product__card
+                        h4.product__card-title #{product.title}
+                        img.product__card-img(src="https://bom.to/7MUpD", alt="img")
+                        .product__info
+                            h3.product__card-price $19.99
+                            p.product__card-content it's a very awesome book about people on the islands
+                            button.product__card-btn add to card
+        else 
+            h3.title--warning there is no product here
+
+        
