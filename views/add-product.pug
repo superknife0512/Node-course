@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title add product
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        header.header
+            nav.header__nav
+                ul.header__nav-list
+                    li.header__nav-item
+                        a(href="/").header__nav-link shop
+                    li.header__nav-item
+                        a(href="/").header__nav-link add product    
+        main
+            form.form(action="/add-product" method="post")
+                h3 Add your file
+                input.form__product(type="text" name="title" placeholder="add product")
+                input.form__btn(type="submit")
