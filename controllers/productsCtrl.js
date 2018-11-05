@@ -14,7 +14,7 @@ const renderProduct = (req, res)=>{
 
 const renderProducts = (req,res,next)=>{
     Product.getProducts( products => {
-        res.render('shop/product-list', {products,
+        res.render('shop', {products,
                             title: 'Online shop',
                             path:'/'});
     });
