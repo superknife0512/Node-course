@@ -10,7 +10,18 @@
         
             <form action="/add-product" method="POST" class="form" >
                 <h3>Add your file</h3>
-                <input type="text" name="title" class="form__product" placeholder="adding something">
+                <div class="form__control">
+                    <input type="text" name="title" class="form__product" placeholder="Title">
+                </div>
+                <div class="form__control">
+                    <input type="text" name="imageUrl" class="form__product" placeholder="Image Url">
+                </div>
+                <div class="form__control">
+                    <input type="text" name="price" class="form__product" placeholder="Price">
+                </div>
+                <div class="form__control">
+                    <textarea rows="4"  name="des" class="form__product" placeholder="Description" ></textarea> 
+                </div>
                 <input type="submit" class="form__btn">
             </form>
         </div>

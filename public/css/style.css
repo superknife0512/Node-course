@@ -51,28 +51,6 @@ body {
     font-size: 16px;
     color: #333; }
 
-/* add product section */
-.form {
-  padding: 30px 50px; }
-  .form h3 {
-    color: #444; }
-  .form__product {
-    padding: 8px;
-    color: #555;
-    margin-top: 15px;
-    border-radius: 5px;
-    border: 1px solid #a7a7a7; }
-  .form__btn {
-    padding: 10px 20px;
-    color: white;
-    background-color: #b93869;
-    transition: all .3s;
-    border: none;
-    border-radius: 4px;
-    margin-left: 10px; }
-    .form__btn:hover {
-      background-color: #ee7fa9; }
-
 .product {
   margin-top: 3rem;
   display: grid;
@@ -120,3 +98,27 @@ body {
     flex-direction: column;
     align-items: center;
     margin: 1rem; }
+
+/* add product section */
+.form {
+  padding: 30px 50px; }
+  .form h3 {
+    color: #444; }
+  .form__control {
+    margin-bottom: 15px; }
+  .form__product {
+    padding: 8px;
+    color: #555;
+    margin-top: 15px;
+    border-radius: 5px;
+    border: 1px solid #a7a7a7;
+    width: 60%; }
+  .form__btn {
+    padding: 10px 20px;
+    color: white;
+    background-color: #b93869;
+    transition: all .3s;
+    border: none;
+    border-radius: 4px; }
+    .form__btn:hover {
+      background-color: #ee7fa9; }
