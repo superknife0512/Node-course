@@ -27,7 +27,7 @@ body {
 .header {
   background-color: #b93869; }
   .header__nav {
-    padding: 30px 50px; }
+    padding: 30px 0; }
   .header__nav-list {
     display: flex; }
   .header__nav-item {
