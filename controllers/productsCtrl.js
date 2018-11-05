@@ -8,18 +8,18 @@ const addProduct = (req, res)=>{
 }
 
 const renderProduct = (req, res)=>{
-    res.render('add-product', {title: 'add Product',
+    res.render('admin/add-product', {title: 'add Product',
                                 path: '/admin/add-product'})
 }
 
 const renderProducts = (req,res,next)=>{
     Product.getProducts( products => {
-        res.render('shop', {products,
+        res.render('shop/shop-list', {products,
                             title: 'Online shop',
                             path:'/'});
     });
+    
 }
-
 
 
 module.exports = {
