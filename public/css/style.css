@@ -64,11 +64,11 @@ body {
   .product__card-title {
     color: #b93869;
     text-transform: capitalize;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 100;
     display: flex;
     justify-content: center;
-    margin: .5rem 0; }
+    margin: .9rem 0; }
   .product__card-img {
     height: 300px;
     width: 100%;
@@ -122,3 +122,87 @@ body {
     border-radius: 4px; }
     .form__btn:hover {
       background-color: #ee7fa9; }
+
+.panel {
+  padding: 4rem;
+  margin-top: 4rem;
+  box-shadow: 0.6rem 0.6rem 3rem rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column; }
+  .panel__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem; }
+  .panel__number {
+    color: #ff7e9a;
+    font-size: 1.5rem;
+    font-weight: 400; }
+  .panel__title {
+    color: #555;
+    text-transform: uppercase;
+    color: #b93869; }
+  .panel__deleteAll:link, .panel__deleteAll:visited {
+    color: white;
+    background-color: #b93869;
+    padding: .5rem .9rem;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all .2s; }
+  .panel__deleteAll:hover {
+    background-color: #9c2442; }
+  .panel__product {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column; }
+    .panel__product-cart {
+      height: 240px;
+      width: 100%;
+      display: flex;
+      border: 1px solid #dedede;
+      border-radius: 8px;
+      transition: all .5s;
+      overflow: hidden; }
+      .panel__product-cart:not(:last-child) {
+        margin-bottom: 2rem; }
+      .panel__product-cart:hover {
+        box-shadow: 0.6rem 0.6rem 3rem rgba(0, 0, 0, 0.2);
+        border: none;
+        transform: translateY(-5px); }
+    .panel__product-img {
+      height: 100%;
+      width: 400px;
+      object-fit: cover;
+      object-position: top; }
+    .panel__product-info {
+      margin-left: 4rem;
+      align-self: center;
+      margin-right: auto; }
+    .panel__product-title {
+      color: #b93869;
+      text-transform: capitalize;
+      font-size: 2rem; }
+    .panel__product-des {
+      color: #444;
+      font-size: 1.2rem; }
+    .panel__product-change {
+      display: flex;
+      flex-direction: column;
+      align-self: center;
+      margin-right: 2rem;
+      align-items: center; }
+    .panel__product-edit {
+      margin-bottom: 1rem;
+      background: none;
+      border: none; }
+  .panel__edit--icon {
+    font-size: 2rem;
+    color: #f16893; }
+    .panel__edit--icon:hover {
+      color: #9c264e; }
+  .panel__del--icon {
+    font-size: 2rem;
+    color: #2cd8cf; }
+    .panel__del--icon:hover {
+      color: #187e64; }

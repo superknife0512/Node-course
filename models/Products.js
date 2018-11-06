@@ -35,5 +35,16 @@ module.exports = class Product {
             }
         })
     }
+
+    static getProductNum(){
+        fs.readFile(p, (err, data)=>{
+            if(err){
+                return 0;
+            } else {
+                const parseData = JSON.parse(data);
+                return parseData.length;
+            }
+        })
+    }
 }
 

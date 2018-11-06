@@ -22,11 +22,17 @@ const renderCheckOut = (req,res,next)=>{
     res.render('shop/check-out', {title: 'Check Out Page', path: '/check-out'})
 }
 
+const renderOrder = (req,res,next)=>{
+    res.render('shop/order', {title: 'Your Order', path: '/order'})
+}
+
+
 
 
 module.exports = {
     renderProducts,
     renderCart,
     renderIndexPro,
-    renderCheckOut
+    renderCheckOut,
+    renderOrder
 }

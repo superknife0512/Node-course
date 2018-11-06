@@ -19,14 +19,24 @@ const renderAddProduct = (req, res) => {
 }
 
 const renderAdminProduct = (req, res, next) => {
-    res.render('admin/adminProducts', {
-        title: 'Admin Product',
-        path: '/admin-product'
-    });
+    const productNumber = Product.getProductNum();
+    Product.getProducts( product => {
+        res.render('admin/adminProducts', {
+            product,
+            title: 'Admin Product',
+            path: '/admin-product',
+            productNumber,
+        });
+    })
+}
+
+const renderEdit = (req, res, next) => {
+    res.render('admin/edit',{title: 'Edit Page', path: '/edit'})
 }
 
 module.exports = {
     addProduct,
     renderAddProduct,
-    renderAdminProduct
+    renderAdminProduct,
+    renderEdit
 }

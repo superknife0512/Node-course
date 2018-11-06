@@ -4,7 +4,49 @@
 <%-include('../includes/navigation.ejs') %>
 
 <main>
-    <h3>cax</h3>
+    <div class="container">
+        <div class="panel">
+            <div class="panel__info">
+                <h4 class="panel__number">Product number: <%=productNumber %></h4>
+                <h3 class="panel__title">Edit product</h3>
+                <a href="#" class="panel__deleteAll">
+                    Delete all products
+                </a>
+            </div>
+            <hr>
+            <div class="panel__product">
+
+            <% product.forEach(product=>{ %>
+                
+                <div class="panel__product-cart">
+                    <img src="<%=product.imageUrl %>" alt="<%=product.title %>" class="panel__product-img">
+                    <div class="panel__product-info">
+                        <h3 class="panel__product-title">
+                            <%=product.title %>
+                        </h3>
+                        <h5 class="panel__product-des">
+                            <%=product.des %>
+                        </h5>
+                        <h4 class="panel__product-price"><%=product.price %></h4>
+                    </div>
+                    <div class="panel__product-change">
+
+                    <form action="/edit" method="POST">                                           
+                        <button class="panel__product-edit" type="submit">
+                            <i class="fas fa-times-circle panel__edit--icon"></i>
+                        </button>
+                    </form>
+                        <a href="/edit" class="panel__product-del">
+                            <i class="fas fa-pen-square  panel__del--icon"></i>
+                        </a>
+                    </div>
+                </div>
+
+            <%}) %>            
+            </div>
+
+        </div>
+    </div>
 </main>
 
 <%-include('../includes/end.ejs') %>
