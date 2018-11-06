@@ -26,6 +26,13 @@ const renderOrder = (req,res,next)=>{
     res.render('shop/order', {title: 'Your Order', path: '/order'})
 }
 
+const renderDetail = (req,res,next)=>{
+    const prodId = req.params.productId;
+    Product.getProductDetail(prodId, (product)=>{
+        res.render('shop/product-detail', {product, title: product.title, path:'/product'})
+    })
+}
+
 
 
 
@@ -34,5 +41,6 @@ module.exports = {
     renderCart,
     renderIndexPro,
     renderCheckOut,
-    renderOrder
+    renderOrder,
+    renderDetail
 }

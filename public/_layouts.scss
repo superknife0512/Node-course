@@ -19,12 +19,18 @@ body{
     }
     &__nav-list{
         display: flex;
+        align-items: center;
     }
     &__nav-item{
         list-style: none;
+        
     }
     &__nav-item:not(:last-child){
         margin-right: 3rem;
+        @media only screen and (max-width: 999px){
+            margin-right: 0 ;
+            margin-bottom: 1rem;
+        }
     }
     &__nav-link{
         &:link, &:visited{
@@ -37,6 +43,42 @@ body{
     &__nav-link:hover{
         color: rgb(240, 190, 98);
     }
+    &__left {
+        margin-right: auto;
+    }
+    &__right{
+        display: flex;
+        @media only screen and (max-width: 999px){
+            flex-direction: column;
+            align-items: flex-end;
+        }
+    }
+    &__right-menu{
+        display: flex;
+
+        @media only screen and (max-width: 999px){
+            display: none;
+            flex-direction: column;
+            margin-top: 20px;
+            align-items: flex-end;
+        }
+    }
+    &__responsive{
+        display: none;
+        &-icon{
+            font-size: 2rem;
+            color: white;
+            padding: 5px 8px;
+            border-radius: 3px;
+            border: 1px solid white;
+        }
+        @media only screen and (max-width: 999px){
+            display: flex;
+            cursor: pointer;
+            color: rgb(250, 196, 214);
+        }
+    }
+
 }
 .content{
     padding: 30px 50px;

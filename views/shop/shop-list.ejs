@@ -24,7 +24,10 @@
                     <p class="product__card-content">
                         <%=product.des %>
                     </p>
-                    <button class="product__card-btn">Add to card</button>
+                    <div class="product__navigation">                    
+                        <a class="product__cart-detail" href="/<%= product.id %>">Detail</a>
+                        <button class="product__card-btn">Add to card</button>
+                    </div>
                 </div>
             </div>
 

@@ -1,0 +1,27 @@
+
+<%-include('../includes/header.ejs') %>
+</head>
+<%-include('../includes/navigation.ejs') %>
+
+<main>
+    <div class="detail container">
+        
+            <img class="detail__img" src="<%=product.imageUrl %>" alt="cax">
+        
+        <div class="detail__info">
+            <h1 class="detail__title">
+                <%=product.title %>
+            </h1>
+            <h4 class="detail__des">
+                <%=product.des %>
+            </h4>
+            <h3 class="detail__price"><%=product.price %></h3>
+            
+            <div class="detail__buy">
+                <a href="#" class="btn btn-warning">buy now</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%-include('../includes/end.ejs') %>

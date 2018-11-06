@@ -38,7 +38,7 @@
 
     }
     &__card-btn{
-        padding: 7px 15px;
+        padding: .5rem .7rem;
         background-color: transparent;
         border: 1px solid $primary-color;
         border-radius: 4px;
@@ -55,5 +55,24 @@
         flex-direction: column;
         align-items: center;
         margin: 1rem;
+    }
+    &__navigation{
+        display: flex;
+        align-items: center;
+    }
+    &__cart-detail{
+        &:link, &:visited{
+            text-decoration: none;
+            color: $primary-color;
+            border: solid 1px $primary-color;
+            border-radius: 4px;
+            margin-right: 10px;
+            padding: .5rem .7rem;
+            transition: all .2s;
+        }
+        &:hover{
+            background-color: $primary-color;
+            color: white;
+        }
     }
 }

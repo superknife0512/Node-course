@@ -12,6 +12,7 @@ module.exports = class Product {
     }
 
     addProduct() {
+        this.id = Math.random().toString(35).substr(2,7);
         fs.readFile(p, (err, fileContent)=>{
             let products = [];
             if(!err){ //file exist 
@@ -46,5 +47,13 @@ module.exports = class Product {
             }
         })
     }
+
+    static getProductDetail(id, cb){ 
+        fs.readFile( p, (err,data)=>{
+            const proAll = JSON.parse(data);
+            const proDetail = proAll.find(ele => ele.id === id)
+            cb(proDetail)
+        })
+    }   
 }
 

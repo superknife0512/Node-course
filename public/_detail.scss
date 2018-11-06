@@ -1,0 +1,36 @@
+
+.detail{
+    margin-top: 5rem;
+    display: flex;
+    
+    &__img{
+        height: 400px;
+        width: 350px;
+        object-fit: cover;
+        object-position: center;
+        padding-right: 3rem;
+        border-right: 1px solid rgba($color: #000000, $alpha: .2)
+    }
+    &__info{
+        margin-left: 3rem;
+    }
+    &__title{
+        text-transform: uppercase;
+        color: $primary-color;
+        margin-bottom: 2rem
+    }
+    &__des{
+        margin-bottom: 2rem;
+    }
+    &__price{
+        margin-bottom: 1.5rem
+    }
+    &__buy{
+
+    }
+
+}
+
+.btn{
+    text-transform: uppercase;
+}
