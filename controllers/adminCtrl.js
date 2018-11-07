@@ -19,13 +19,11 @@ const renderAddProduct = (req, res) => {
 }
 
 const renderAdminProduct = (req, res, next) => {
-    const productNumber = Product.getProductNum();
     Product.getProducts( product => {
         res.render('admin/adminProducts', {
             product,
             title: 'Admin Product',
             path: '/admin-product',
-            productNumber,
         });
     })
 }

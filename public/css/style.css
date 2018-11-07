@@ -144,7 +144,7 @@ body {
     border: solid 1px #b93869;
     border-radius: 4px;
     margin-right: 10px;
-    padding: .5rem .7rem;
+    padding: 6px .7rem;
     transition: all .2s; }
   .product__cart-detail:hover {
     background-color: #b93869;

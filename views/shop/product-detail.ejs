@@ -6,7 +6,7 @@
 <main>
     <div class="detail container">
         
-            <img class="detail__img" src="<%=product.imageUrl %>" alt="cax">
+            <img class="detail__img" src="<%=product.imageUrl %>" alt="<%=product.title %>">
         
         <div class="detail__info">
             <h1 class="detail__title">
@@ -18,7 +18,7 @@
             <h3 class="detail__price"><%=product.price %></h3>
             
             <div class="detail__buy">
-                <a href="#" class="btn btn-warning">buy now</a>
+                <%-include('../includes/add-to-cart.ejs') %>
             </div>
         </div>
     </div>

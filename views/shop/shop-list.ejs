@@ -25,8 +25,9 @@
                         <%=product.des %>
                     </p>
                     <div class="product__navigation">                    
+                        <!--<a class="product__cart-detail" href="/<%= product.seoTitle %>.<%= product.id %>">Detail</a>-->
                         <a class="product__cart-detail" href="/<%= product.id %>">Detail</a>
-                        <button class="product__card-btn">Add to card</button>
+                        <%-include('../includes/add-to-cart.ejs',{product}) %>
                     </div>
                 </div>
             </div>

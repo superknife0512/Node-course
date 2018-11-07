@@ -21,4 +21,4 @@ app.set('views', 'views');
 // adding 404 brain not found
 app.use(render404Page)
 
-app.listen(8080);
+app.listen(3000);

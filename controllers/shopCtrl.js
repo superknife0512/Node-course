@@ -28,9 +28,17 @@ const renderOrder = (req,res,next)=>{
 
 const renderDetail = (req,res,next)=>{
     const prodId = req.params.productId;
-    Product.getProductDetail(prodId, (product)=>{
-        res.render('shop/product-detail', {product, title: product.title, path:'/product'})
+    Product.getProductDetail(prodId, product=>{
+        res.render('shop/product-detail', {
+            product,
+            title: product.title,
+            path: '/'
+        })
     })
+}
+const addToCart = (req,res,next)=>{
+    const prodId = req.body.productId;
+    console.log(prodId);
 }
 
 
@@ -42,5 +50,6 @@ module.exports = {
     renderIndexPro,
     renderCheckOut,
     renderOrder,
-    renderDetail
+    renderDetail,
+    addToCart
 }

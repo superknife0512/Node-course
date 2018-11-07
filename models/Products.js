@@ -13,6 +13,7 @@ module.exports = class Product {
 
     addProduct() {
         this.id = Math.random().toString(35).substr(2,7);
+        this.seoTitle();
         fs.readFile(p, (err, fileContent)=>{
             let products = [];
             if(!err){ //file exist 
@@ -23,6 +24,11 @@ module.exports = class Product {
                 console.log(err);
             })
         })
+    }
+
+    seoTitle(){
+        const titleArr = this.title.split(' ');
+        this.seoTitle = titleArr.join('-');
     }
 
     static getProducts( fn ) {
@@ -37,22 +43,21 @@ module.exports = class Product {
         })
     }
 
-    static getProductNum(){
-        fs.readFile(p, (err, data)=>{
-            if(err){
-                return 0;
-            } else {
-                const parseData = JSON.parse(data);
-                return parseData.length;
-            }
-        })
-    }
-
     static getProductDetail(id, cb){ 
-        fs.readFile( p, (err,data)=>{
-            const proAll = JSON.parse(data);
-            const proDetail = proAll.find(ele => ele.id === id)
-            cb(proDetail)
+        fs.readFile( p,  async (err,data)=>{
+            try{
+
+                if(err){
+                    cb([])
+                } else {
+    
+                    const allProducts =  JSON.parse(data);
+                    const dataDetail = await allProducts.find(ele=>ele.id === id);
+                    cb(dataDetail);
+                }
+            } catch(err){
+                console.log(err);
+            }
         })
     }   
 }
