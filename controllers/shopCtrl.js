@@ -1,5 +1,6 @@
 
 const Product = require('../models/Products');
+const Cart = require('../models/Cart')
 
 
 const renderProducts = (req,res,next)=>{
@@ -29,16 +30,23 @@ const renderOrder = (req,res,next)=>{
 const renderDetail = (req,res,next)=>{
     const prodId = req.params.productId;
     Product.getProductDetail(prodId, product=>{
-        res.render('shop/product-detail', {
-            product,
-            title: product.title,
-            path: '/'
-        })
+        if(product){
+            return res.render('shop/product-detail', {
+                product,
+                title: product.title,
+                path: '/'
+            })
+        }
+        return ; 
     })
 }
 const addToCart = (req,res,next)=>{
     const prodId = req.body.productId;
-    console.log(prodId);
+    Product.getProductDetail(prodId, product=>{
+        console.log(product);
+        Cart.addToCart(product)
+    })
+    res.redirect('/cart')
 }
 
 

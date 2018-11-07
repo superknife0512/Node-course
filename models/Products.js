@@ -44,7 +44,7 @@ module.exports = class Product {
     }
 
     static getProductDetail(id, cb){ 
-        fs.readFile( p,  async (err,data)=>{
+        fs.readFile( p, (err,data)=>{
             try{
 
                 if(err){
@@ -52,7 +52,7 @@ module.exports = class Product {
                 } else {
     
                     const allProducts =  JSON.parse(data);
-                    const dataDetail = await allProducts.find(ele=>ele.id === id);
+                    const dataDetail =  allProducts.find(ele=>ele.id === id);
                     cb(dataDetail);
                 }
             } catch(err){
