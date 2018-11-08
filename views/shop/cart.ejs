@@ -7,7 +7,11 @@
     <div class="cart container">
         <div class="cart__heading">
             <h3 class="cart__title">Your cart</h3>
-            <h2 class="cart__number">Total amount: $<%= cartTotalPrice %></h2>
+            <h2 class="cart__number">Total amount: $
+                <span id="price">
+                    <%= cartTotalPrice < 0.05 ? 0 : cartTotalPrice%>
+                </span>
+            </h2>
         </div>
         <% if(cartProducts){%>
             <table class="table">
@@ -16,7 +20,7 @@
                     <th scope="col">#</th>
                     <th scope="col">title</th>
                     <th scope="col">quatity</th>
-                    <th scope="col">Delete our cart</th>
+                    <th scope="col">Delete your product</th>
                 </tr>
                 </thead>
                 <tbody>

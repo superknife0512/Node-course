@@ -15,9 +15,14 @@ const renderProducts = (req, res, next) => {
 const renderCart = (req, res, next) => {
     Cart.getCartData(cart => {
         if (!cart) {
-            return false;
+            return res.render('shop/cart', {
+                path: '/cart',
+                title: 'Your cart',
+                cartProducts: null,
+                cartTotalPrice: 0
+            })
         }
-        return res.render('shop/cart', {
+        res.render('shop/cart', {
             path: '/cart',
             title: 'Your cart',
             cartProducts: cart.products,
@@ -64,6 +69,7 @@ const addToCart = (req, res, next) => {
     const prodId = req.body.productId;
     Product.getProductDetail(prodId, product => {
         Cart.addToCart(product)
+        console.log(product);
     })
     res.redirect('/cart')
 }
