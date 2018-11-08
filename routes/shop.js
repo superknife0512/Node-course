@@ -10,6 +10,7 @@ route.post('/cart', shopController.addToCart)
 route.get('/index-product', shopController.renderIndexPro)
 route.get('/check-out', shopController.renderCheckOut)
 route.get('/order', shopController.renderOrder)
+route.post('/delete-cart', shopController.deleteCart)
 route.get('/:productId', shopController.renderDetail)
 
 module.exports = route;

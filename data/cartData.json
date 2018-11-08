@@ -1,16 +1,1 @@
-{
-    "products": [{
-        "title": "Percy Jackson",
-        "id": "asd12ea",
-        "qty": 2
-    }, {
-        "title": "Monte Cristo",
-        "id": "m35ieqc",
-        "qty": 1
-    }, {
-        "title": "I'am number 4",
-        "id": "a81sd31a",
-        "qty": 1
-    }],
-    "totalPrice": 81.96
-}
+{"products":[{"title":"I'am number 4","id":"a81sd31a","qty":2},{"title":"Monte Cristo","id":"m35ieqc","qty":1},{"title":"Donkihote","id":"y6cw7ra","qty":1}],"totalPrice":"0.0018.9918.9920.9912.99"}

@@ -312,3 +312,17 @@ body {
 
 .btn {
   text-transform: uppercase; }
+
+.cart {
+  margin-top: 4rem;
+  margin-bottom: 2.5rem; }
+  .cart__heading {
+    display: flex;
+    align-items: center; }
+  .cart__title {
+    font-size: 2rem;
+    color: #b93869;
+    margin-right: auto; }
+  .cart__number {
+    font-size: 1.6rem;
+    color: #444; }

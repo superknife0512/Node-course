@@ -1,55 +1,80 @@
-
 const Product = require('../models/Products');
 const Cart = require('../models/Cart')
 
 
-const renderProducts = (req,res,next)=>{
-    Product.getProducts( products => {
-        res.render('shop/shop-list', {products,
-                            title: 'Online shop',
-                            path:'/'});
-    });    
+const renderProducts = (req, res, next) => {
+    Product.getProducts(products => {
+        res.render('shop/shop-list', {
+            products,
+            title: 'Online shop',
+            path: '/'
+        });
+    });
 }
 
-const renderCart = (req,res,next)=>{
-    res.render('shop/cart', {title: 'Cart', path: '/cart'})
+const renderCart = (req, res, next) => {
+    Cart.getCartData(cart => {
+        if (!cart) {
+            return false;
+        }
+        return res.render('shop/cart', {
+            path: '/cart',
+            title: 'Your cart',
+            cartProducts: cart.products,
+            cartTotalPrice: cart.totalPrice
+        })
+    })
 }
 
-const renderIndexPro = (req,res,next)=>{
-    res.render('shop/index', {title: 'Index Product', path: '/index-product'})
+const renderIndexPro = (req, res, next) => {
+    res.render('shop/index', {
+        title: 'Index Product',
+        path: '/index-product'
+    })
 }
 
-const renderCheckOut = (req,res,next)=>{
-    res.render('shop/check-out', {title: 'Check Out Page', path: '/check-out'})
+const renderCheckOut = (req, res, next) => {
+    res.render('shop/check-out', {
+        title: 'Check Out Page',
+        path: '/check-out'
+    })
 }
 
-const renderOrder = (req,res,next)=>{
-    res.render('shop/order', {title: 'Your Order', path: '/order'})
+const renderOrder = (req, res, next) => {
+    res.render('shop/order', {
+        title: 'Your Order',
+        path: '/order'
+    })
 }
 
-const renderDetail = (req,res,next)=>{
+const renderDetail = (req, res, next) => {
     const prodId = req.params.productId;
-    Product.getProductDetail(prodId, product=>{
-        if(product){
+    Product.getProductDetail(prodId, product => {
+        if (product) {
             return res.render('shop/product-detail', {
                 product,
                 title: product.title,
                 path: '/'
             })
         }
-        return ; 
+        return;
     })
 }
-const addToCart = (req,res,next)=>{
+const addToCart = (req, res, next) => {
     const prodId = req.body.productId;
-    Product.getProductDetail(prodId, product=>{
-        console.log(product);
+    Product.getProductDetail(prodId, product => {
         Cart.addToCart(product)
     })
     res.redirect('/cart')
 }
 
-
+const deleteCart = (req, res, params) => {
+    const prodId = req.body.productId;
+    Product.getProductDetail(prodId, product => {
+        Cart.deleteProductCart(prodId, product.price)
+    })
+    res.redirect('/cart');
+}
 
 
 module.exports = {
@@ -59,5 +84,6 @@ module.exports = {
     renderCheckOut,
     renderOrder,
     renderDetail,
-    addToCart
+    addToCart,
+    deleteCart
 }

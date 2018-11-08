@@ -48,15 +48,27 @@ module.exports = class Cart {
             // our new products array after we remove product 
             const updatedCartProducts = allCarts.products.filter(ele => ele.id !== id)
             const updatedPrice = allCarts.totalPrice - parseFloat(productPrice.replace('$', '')) * productDel.qty;
-
+            const fixPrice = updatedPrice.toFixed(2);
             const newCart = {
                 products: updatedCartProducts,
-                totalPrice: updatedPrice
+                totalPrice: fixPrice
             }
 
             fs.writeFile(p, JSON.stringify(newCart), err => {
                 console.log(err);
             })
+        })
+    }
+
+    static getCartData(cb) {
+        fs.readFile(p, (err, fileContent) => {
+            let cart = {};
+            if (!err) {
+                cart = JSON.parse(fileContent);
+                cb(cart);
+            } else {
+                cb(null);
+            }
         })
     }
 }
