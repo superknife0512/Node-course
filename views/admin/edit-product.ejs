@@ -1,0 +1,45 @@
+<%-include('../includes/header') %>
+    
+</head>
+
+<body>
+    <%-include('../includes/navigation') %>
+
+    <main>
+        <div class="container text-center">
+        
+            <form action="<%= editMode ? '/edit-product' : '/add-product' %>" method="POST" class="form" >
+                <h3> <%= editMode? 'Update your product' : 'Add your new Product' %></h3>
+                <div class="form__control">
+                    <input type="text" 
+                            name="title" 
+                            class="form__product" 
+                            placeholder="Title"
+                            value="<%=editMode ? product.title : '' %>">
+                </div>
+                <div class="form__control">
+                    <input type="text" 
+                        name="imageUrl" 
+                        class="form__product" 
+                        placeholder="Image Url"
+                        value="<%=editMode ? product.imageUrl : '' %>">
+                </div>
+                <div class="form__control">
+                    <input type="text" 
+                        name="price" 
+                        class="form__product" 
+                        placeholder="Price"
+                        value="<%=editMode ? product.price : '' %>">
+                </div>
+                <div class="form__control">
+                    <textarea rows="4"  name="des" class="form__product" placeholder="Description" ><%=editMode ? product.des : '' %>
+                    </textarea> 
+                </div>
+                <% if(editMode){ %>
+                    <input type="hidden" name="productId" value="<%= product.id %>">
+                <% } %>
+                <button type="submit" class="form__btn"><%=editMode ? 'Update' : 'Submit' %></button>
+            </form>
+        </div>
+    </main>
+    <%-include('../includes/end') %>

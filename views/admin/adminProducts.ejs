@@ -30,15 +30,16 @@
                         <h4 class="panel__product-price"><%=product.price %></h4>
                     </div>
                     <div class="panel__product-change">
+                        <a href="/edit-product/<%= product.id %>?edit=true" class="panel__product-edit">
+                            <i class="fas fa-pen-square panel__del--icon"></i>
+                        </a>                                  
 
-                    <form action="/edit" method="POST">                                           
-                        <button class="panel__product-edit" type="submit">
-                            <i class="fas fa-times-circle panel__edit--icon"></i>
-                        </button>
-                    </form>
-                        <a href="/edit" class="panel__product-del">
-                            <i class="fas fa-pen-square  panel__del--icon"></i>
-                        </a>
+                        <form action="/delete" method="POST">                            
+                            <button class="panel__product-del">
+                                <i class="fas fa-times-circle  panel__edit--icon"></i>
+                            </button>
+                            <input type="hidden" name="productId" value="<%= product.id %>">
+                        </form>
                     </div>
                 </div>
 
