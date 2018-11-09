@@ -2,18 +2,25 @@ const fs = require('fs');
 const path = require('path');
 const p = path.join(__dirname, '..', 'data', 'cartData.json');
 
+const getDataFromCart = (cb) => {
+    fs.readFile(p, (err, fileContent) => {
+        if (err) {
+            cb(null);
+        } else {
+            cb(JSON.parse(fileContent))
+        }
+    })
+}
 
 module.exports = class Cart {
     static addToCart(product) {
-        // 1 fetch data from the file 
-        fs.readFile(p, (err, fileContent) => {
+        getDataFromCart(cartData => {
             let cart = {
                 products: [],
                 totalPrice: 0
             }
-            if (!err) {
-                // existing a file 
-                cart = JSON.parse(fileContent);
+            if (cart) {
+                cart = cartData
             }
             // 2 analyze our carts and check it
             const record = cart.products.find(ele => ele.id === product.id)
@@ -35,15 +42,15 @@ module.exports = class Cart {
                 console.log(err);
             })
         })
+
     }
 
     static deleteProductCart(id, productPrice) {
-        fs.readFile(p, (err, fileContent) => {
-            if (err) {
-                return;
+
+        getDataFromCart(allCarts => {
+            if (!allCarts) {
+                return
             }
-            // fetch products from cart file
-            const allCarts = JSON.parse(fileContent);
             // find out product we will delete
             const productDel = allCarts.products.find(ele => ele.id === id);
             // our new products array after we remove product 
@@ -61,13 +68,8 @@ module.exports = class Cart {
     }
 
     static getCartData(cb) {
-        fs.readFile(p, (err, fileContent) => {
-            if (!err) {
-                const cart = JSON.parse(fileContent);
-                cb(cart);
-            } else {
-                cb(null);
-            }
+        getDataFromCart(cartData => {
+            cb(cartData)
         })
     }
 }
