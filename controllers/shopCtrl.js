@@ -3,12 +3,14 @@ const Cart = require('../models/Cart')
 
 
 const renderProducts = (req, res, next) => {
-    Product.getProducts(products => {
+    Product.fetchAll().then(products => {
         res.render('shop/shop-list', {
             products,
             title: 'Online shop',
             path: '/'
         });
+    }).catch(err => {
+        console.log(err);
     });
 }
 

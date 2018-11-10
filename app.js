@@ -5,10 +5,13 @@ const path = require('path')
 const adminRoute = require('./routes/admin');
 const shopRoute = require('./routes/shop');
 const render404Page = require('./controllers/404Ctrl');
+const mongoConnect = require('./utilities/database');
 
 const app = express();
 
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({
+    extended: false
+}))
 app.use('/edit-product', express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -23,4 +26,6 @@ app.set('views', 'views');
 // adding 404 brain not found
 app.use(render404Page)
 
-app.listen(3000);
+mongoConnect.fetchDatabase(() => {
+    app.listen(3000);
+})
