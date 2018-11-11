@@ -11,6 +11,6 @@ route.get('/index-product', shopController.renderIndexPro)
 // route.get('/check-out', shopController.renderCheckOut)
 // route.get('/order', shopController.renderOrder)
 // route.post('/delete-cart', shopController.deleteCart)
-// route.get('/:productId', shopController.renderDetail)
+route.get('/:productId', shopController.renderDetail)
 
 module.exports = route;

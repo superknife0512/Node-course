@@ -30,7 +30,7 @@
                         <h4 class="panel__product-price"><%=product.price %></h4>
                     </div>
                     <div class="panel__product-change">
-                        <a href="/edit-product/<%= product.id %>?edit=true" class="panel__product-edit">
+                        <a href="/edit-product/<%= product._id %>?edit=true" class="panel__product-edit">
                             <i class="fas fa-pen-square panel__del--icon"></i>
                         </a>                                  
 
@@ -38,7 +38,7 @@
                             <button class="panel__product-del">
                                 <i class="fas fa-times-circle  panel__edit--icon"></i>
                             </button>
-                            <input type="hidden" name="productId" value="<%= product.id %>">
+                            <input type="hidden" name="productId" value="<%= product._id %>">
                         </form>
                     </div>
                 </div>

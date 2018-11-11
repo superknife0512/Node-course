@@ -56,7 +56,7 @@ const renderOrder = (req, res, next) => {
 
 const renderDetail = (req, res, next) => {
     const prodId = req.params.productId;
-    Product.getProductDetail(prodId, product => {
+    Product.getProductDetail(prodId).then(product => {
         if (product) {
             return res.render('shop/product-detail', {
                 product,
@@ -64,7 +64,8 @@ const renderDetail = (req, res, next) => {
                 path: '/'
             })
         }
-        return;
+    }).catch(err => {
+        console.log(err);
     })
 }
 const addToCart = (req, res, next) => {

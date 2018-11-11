@@ -93,7 +93,7 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 320px));
   justify-content: center;
-  grid-column-gap: 40px;
+  grid-column-gap: 75px;
   grid-row-gap: 60px; }
   .product__card {
     background-color: white;

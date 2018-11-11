@@ -4,9 +4,7 @@ const MongoClient = mongodb.MongoClient;
 let _db;
 
 const fetchDatabase = cb => {
-    MongoClient.connect('mongodb+srv://superknife0512:Toan1234@node-app-oqduu.gcp.mongodb.net/shop?retryWrites=true', {
-        useNewUrlParser: true
-    }).then(client => {
+    MongoClient.connect('mongodb+srv://superknife0512:Toan1234@node-app-oqduu.gcp.mongodb.net/shop?retryWrites=true').then(client => {
         console.log('connected!');
         _db = client.db();
         cb();

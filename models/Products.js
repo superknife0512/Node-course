@@ -1,31 +1,60 @@
 const mongoConnect = require('../utilities/database')
+const mongodb = require('mongodb');
 const getDB = mongoConnect.getDatabase;
 
 const Cart = require('./Cart');
 
 module.exports = class Product {
-    constructor(title, imageUrl, price, des) {
+    constructor(title, imageUrl, price, des, id = null) {
         this.title = title;
         this.imageUrl = imageUrl;
         this.price = price;
         this.des = des;
+        this._id = id;
     }
     save() {
         const db = getDB();
-        return db.collection('products').insertOne(this).then(result => {
+        let dbRes;
+        if (this._id) {
+            //it will be an update action
+            dbRes = db.collection('products').updateOne({
+                _id: new mongodb.ObjectId(this._id)
+            }, {
+                $set: {
+                    title: this.title,
+                    imageUrl: this.imageUrl,
+                    des: this.des,
+                    price: this.price
+                }
+            })
+        } else {
+            dbRes = db.collection('products').insertOne(this);
+        }
+        return dbRes.then(result => {
             console.log(result);
         }).catch(err => {
             console.log(err);
-        });
+        })
     }
 
     static fetchAll() {
         const db = getDB();
         return db.collection('products').find().toArray().then(products => {
-            console.log(products);
             return products
         }).catch(err => {
             throw err
+        })
+    }
+
+    static getProductDetail(productId) {
+        const db = getDB();
+        return db.collection('products').find({
+            _id: new mongodb.ObjectId(productId)
+        }).next().then(product => {
+            console.log(product);
+            return product;
+        }).catch(err => {
+            console.log(err);
         })
     }
 }
