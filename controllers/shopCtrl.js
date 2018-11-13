@@ -1,5 +1,6 @@
 const Product = require('../models/Products');
-const Cart = require('../models/Cart')
+const Cart = require('../models/Cart');
+const User = require('../models/User');
 
 
 const renderProducts = (req, res, next) => {
@@ -15,8 +16,8 @@ const renderProducts = (req, res, next) => {
 }
 
 const renderCart = (req, res, next) => {
-    Cart.getCartData(cart => {
-        if (!cart) {
+    req.user.getCartData().then(cartItems => {
+        if (!cartItems) {
             return res.render('shop/cart', {
                 path: '/cart',
                 title: 'Your cart',
@@ -27,9 +28,10 @@ const renderCart = (req, res, next) => {
         res.render('shop/cart', {
             path: '/cart',
             title: 'Your cart',
-            cartProducts: cart.products,
-            cartTotalPrice: cart.totalPrice
+            cartItems,
         })
+    }).catch(err=>{
+        console.log(err);
     })
 }
 
@@ -70,18 +72,20 @@ const renderDetail = (req, res, next) => {
 }
 const addToCart = (req, res, next) => {
     const prodId = req.body.productId;
-    Product.getProductDetail(prodId, product => {
-        Cart.addToCart(product)
+    Product.getProductDetail(prodId).then(product => {
         console.log(product);
+        return product
+    }).then(product => {
+        req.user.addToCart(product)
+    }).catch(err => {
+        console.log(err);
     })
-    res.redirect('/cart')
+    res.redirect('/')
 }
 
 const deleteCart = (req, res, params) => {
-    const prodId = req.body.productId;
-    Product.getProductDetail(prodId, product => {
-        Cart.deleteProductCart(prodId, product.price)
-    })
+    const prodId = req.body.cartItemId;
+    req.user.deleteItem(prodId)
     res.redirect('/cart');
 }
 

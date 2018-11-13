@@ -9,11 +9,11 @@
             <h3 class="cart__title">Your cart</h3>
             <h2 class="cart__number">Total amount: $
                 <span id="price">
-                    <%= cartTotalPrice < 0.05 ? 0 : cartTotalPrice%>
+                   300
                 </span>
             </h2>
         </div>
-        <% if(cartProducts){%>
+        <% if(cartItems){%>
             <table class="table">
                 <thead>
                 <tr>
@@ -24,15 +24,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <% cartProducts.forEach(product=> { %>
+                <% cartItems.forEach(cartItem=> { %>
                     <tr>
-                        <th scope="row"><%=product.id %></th>
-                        <td><%=product.title %></td>
-                        <td><%=product.qty %></td>
+                        <th scope="row"><%=cartItem._id %></th>
+                        <td><%=cartItem.title %></td>
+                        <td><%=cartItem.qty %></td>
                         <td>
                             <form action="/delete-cart" method="POST">
                                 <button type="submit" class="btn btn-danger">Delete</button>
-                                <input type="hidden" name="productId" value="<%= product._id %>">
+                                <input type="hidden" name="cartItemId" value="<%= cartItem._id %>">
                             </form>
                         </td>
                     </tr>

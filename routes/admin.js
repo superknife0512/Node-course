@@ -9,7 +9,7 @@ route.post('/add-product', adminController.addProduct);
 route.get('/add-product', adminController.renderAddProduct);
 route.get('/admin-product', adminController.renderAdminProduct);
 route.post('/edit-product', adminController.editProduct);
-// route.post('/delete', adminController.deleteProduct);
+route.post('/delete', adminController.deleteProduct);
 route.get('/edit-product/:productId', adminController.renderEdit);
 
 module.exports = route;

@@ -5,12 +5,13 @@ const getDB = mongoConnect.getDatabase;
 const Cart = require('./Cart');
 
 module.exports = class Product {
-    constructor(title, imageUrl, price, des, id = null) {
+    constructor(title, imageUrl, price, des, id = null, userId) {
         this.title = title;
         this.imageUrl = imageUrl;
         this.price = price;
         this.des = des;
-        this._id = id;
+        this._id = id ? new mongodb.ObjectId(id) : null;
+        this.userId = userId
     }
     save() {
         const db = getDB();
@@ -18,13 +19,14 @@ module.exports = class Product {
         if (this._id) {
             //it will be an update action
             dbRes = db.collection('products').updateOne({
-                _id: new mongodb.ObjectId(this._id)
+                _id: this._id
             }, {
                 $set: {
                     title: this.title,
                     imageUrl: this.imageUrl,
+                    price: this.price,
                     des: this.des,
-                    price: this.price
+                    userId: this.userId
                 }
             })
         } else {
@@ -53,6 +55,17 @@ module.exports = class Product {
         }).next().then(product => {
             console.log(product);
             return product;
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    static deleteProduct(prodId) {
+        const db = getDB();
+        db.collection('products').deleteOne({
+            _id: new mongodb.ObjectId(prodId)
+        }).then(result => {
+            console.log('has been delete');
         }).catch(err => {
             console.log(err);
         })

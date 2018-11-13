@@ -6,6 +6,7 @@ const adminRoute = require('./routes/admin');
 const shopRoute = require('./routes/shop');
 const render404Page = require('./controllers/404Ctrl');
 const mongoConnect = require('./utilities/database');
+const User = require('./models/User');
 
 const app = express();
 
@@ -15,6 +16,14 @@ app.use(bodyParser.urlencoded({
 app.use('/edit-product', express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'public')))
 
+app.use((req, res, next) => {
+    User.findUser('5be7f74444babc0e34052e60').then(userData => {
+        req.user = new User(userData.username, userData.email, userData.cart, userData._id);
+        next();
+    }).catch(err => {
+        console.log(err);
+    })
+})
 
 app.use(adminRoute);
 app.use(shopRoute);

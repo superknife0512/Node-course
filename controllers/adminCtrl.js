@@ -6,7 +6,7 @@ const addProduct = (req, res) => {
     const price = req.body.price;
     const des = req.body.des;
 
-    const product = new Product(title, imageUrl, price, des);
+    const product = new Product(title, imageUrl, price, des, null, req.user._id);
     product.save().then(result => {
         console.log(result);
     }).catch(err => {
@@ -62,8 +62,9 @@ const editProduct = (req, res, next) => {
     const updatedPrice = req.body.price;
     const updatedDes = req.body.des;
     const updatedImageUrl = req.body.imageUrl;
+    const userId = req.user.userId;
 
-    const product = new Product(updatedTitle, updatedImageUrl, updatedPrice, updatedDes, prodId);
+    const product = new Product(updatedTitle, updatedImageUrl, updatedPrice, updatedDes, prodId, userId);
     product.save().then(result => {
         console.log(result);
     }).catch(err => {
@@ -71,11 +72,11 @@ const editProduct = (req, res, next) => {
     });
     res.redirect('/admin-product');
 }
-// const deleteProduct = (req, res, next) => {
-//     const prodId = req.body.productId;
-//     Product.deleteProduct(prodId);
-//     res.redirect('/admin-product');
-// }
+const deleteProduct = (req, res, next) => {
+    const prodId = req.body.productId;
+    Product.deleteProduct(prodId);
+    res.redirect('/admin-product');
+}
 
 
 
@@ -85,5 +86,5 @@ module.exports = {
     renderAdminProduct,
     renderEdit,
     editProduct,
-    // deleteProduct
+    deleteProduct
 }
