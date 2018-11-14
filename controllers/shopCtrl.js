@@ -30,7 +30,7 @@ const renderCart = (req, res, next) => {
             title: 'Your cart',
             cartItems,
         })
-    }).catch(err=>{
+    }).catch(err => {
         console.log(err);
     })
 }
@@ -46,13 +46,6 @@ const renderCheckOut = (req, res, next) => {
     res.render('shop/check-out', {
         title: 'Check Out Page',
         path: '/check-out'
-    })
-}
-
-const renderOrder = (req, res, next) => {
-    res.render('shop/order', {
-        title: 'Your Order',
-        path: '/order'
     })
 }
 
@@ -89,6 +82,26 @@ const deleteCart = (req, res, params) => {
     res.redirect('/cart');
 }
 
+const addToOrder = (req, res, next) => {
+    req.user.addOrder().then(result=>{
+        console.log(result);
+    }).catch(err=>{
+        throw err;
+    });
+    res.redirect('/order')
+}
+
+const renderOrder = (req, res, next) => {
+    req.user.getOrder().then(orders=>{
+
+        res.render('shop/order', {
+            title: 'Your Order',
+            path: '/order',
+            orders: orders
+        })
+    })
+}
+
 
 module.exports = {
     renderProducts,
@@ -96,6 +109,7 @@ module.exports = {
     renderIndexPro,
     renderCheckOut,
     renderOrder,
+    addToOrder,
     renderDetail,
     addToCart,
     deleteCart

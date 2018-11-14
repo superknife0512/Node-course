@@ -14,6 +14,9 @@
 .toggleMenu {
   display: flex !important; }
 
+.activePopup {
+  display: block !important; }
+
 *, *::after, *::before {
   padding: 0;
   margin: 0;
@@ -326,3 +329,21 @@ body {
   .cart__number {
     font-size: 1.6rem;
     color: #444; }
+
+.order {
+  margin-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column; }
+  .order__card {
+    padding: 1.5rem 2rem;
+    border: 1px solid #888;
+    margin-bottom: 3rem; }
+  .order__number {
+    margin-bottom: 1.5rem; }
+  .order__products {
+    display: flex; }
+  .order__each h5 {
+    color: #b93869;
+    margin-right: 2rem; }
+  .order__each p {
+    margin-bottom: 0rem; }

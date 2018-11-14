@@ -1,0 +1,29 @@
+.order{
+    margin-bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    &__card{
+        padding: 1.5rem 2rem;
+        border: 1px solid #888;
+        margin-bottom: 3rem;
+    }
+    &__number{
+        margin-bottom: 1.5rem;
+    }
+    &__products{
+        display: flex;
+        
+    }
+    &__each{
+        h5{            
+            color: $primary-color;
+            margin-right: 2rem;
+        }
+        p{
+            margin-bottom: 0rem;
+        }
+    }
+    &__title{
+
+    }
+}

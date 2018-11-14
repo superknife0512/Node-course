@@ -95,4 +95,39 @@ module.exports = class User {
             console.log(err);
         })
     }
+
+    async addOrder(){
+        try{
+            const db = getDB();
+            const cartData = await this.getCartData();
+            const order = {
+                cart: cartData,
+                userId: this.userId,
+                username: this.username
+            }
+            await db.collection('orders').insertOne(order);
+            console.log('finish');
+            // clear everything in our carts
+            const updatedCart=this.cart={
+                items: [],                
+            }
+            await db.collection('users').updateOne({_id: this.userId}, {$set:{
+                cart: updatedCart
+            }})
+
+        } catch (err){
+            console.log(err);
+        }
+    }
+
+    async getOrder(){
+        const db = getDB();
+        try{
+            const orderRes = await db.collection('orders').find({userId: this.userId}).toArray();
+            return orderRes
+
+        } catch(err){
+            throw err;
+        }
+    }
 }

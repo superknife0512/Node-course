@@ -14,6 +14,8 @@
             </h2>
         </div>
         <% if(cartItems){%>
+        <div class="table-responsive">
+        
             <table class="table">
                 <thead>
                 <tr>
@@ -39,9 +41,14 @@
                 <% }) %>
                 </tbody>
             </table>
+        </div>
         <% } else { %>
             <h3>nothing in your cart now!</h3>
         <% } %>
+
+        <form action="/order" method="POST">
+            <button class="btn btn-info" type="submit">Order now</button>
+        </form>
     </div>
 </main>
 

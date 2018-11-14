@@ -4,7 +4,31 @@
 <%-include('../includes/navigation.ejs') %>
 
 <main>
-    <h3>Your order here</h3>
+    <div class="container">
+    <br><br>
+        <h3>Order here</h3><hr>
+        <div class="order">
+
+        <% orders.forEach(order=>{ %>
+
+            <div class="order__card">
+                <h4 class="order__number">Order# - <%= order._id.toString() %></h4>
+                <div class="order__products">
+
+                <% order.cart.forEach(item=>{ %>
+                    <div class="order__each">
+                        <h5 class="order__title"><%= item.title %></h5>
+                        <p>quantity: <%= item.qty %> item(s) </p>
+                    </div>
+                <% }) %>
+
+                </div>
+            </div>
+
+        <% }) %>
+        </div>
+
+    </div>
 </main>
 
 <%-include('../includes/end.ejs') %>
