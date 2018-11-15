@@ -1,11 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path')
+const mongoose = require('mongoose');
 
 const adminRoute = require('./routes/admin');
 const shopRoute = require('./routes/shop');
 const render404Page = require('./controllers/404Ctrl');
-const mongoConnect = require('./utilities/database');
 const User = require('./models/User');
 
 const app = express();
@@ -35,6 +35,8 @@ app.set('views', 'views');
 // adding 404 brain not found
 app.use(render404Page)
 
-mongoConnect.fetchDatabase(() => {
+mongoose.connect('mongodb+srv://superknife0512:Toan1234@node-app-oqduu.gcp.mongodb.net/shop?retryWrites=true').then(()=>{
     app.listen(3000);
+}).catch(err=>{
+    throw err
 })
