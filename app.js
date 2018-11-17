@@ -17,8 +17,8 @@ app.use('/edit-product', express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use((req, res, next) => {
-    User.findUser('5be7f74444babc0e34052e60').then(userData => {
-        req.user = new User(userData.username, userData.email, userData.cart, userData._id);
+    User.findById('5befdc338230660c982a2478').then(userData => {
+        req.user = userData;
         next();
     }).catch(err => {
         console.log(err);
@@ -37,6 +37,20 @@ app.use(render404Page)
 
 mongoose.connect('mongodb+srv://superknife0512:Toan1234@node-app-oqduu.gcp.mongodb.net/shop?retryWrites=true').then(()=>{
     app.listen(3000);
+    // create a new user if they don't exist yet
+    User.findOne().then(result=>{
+        if(!result){
+            const user = User({
+                username: 'Toan',
+                email: 'superknife0512@gmail.com',
+                cart:{
+                    items:[]
+                }
+            })
+            user.save();
+        }
+        return false
+    })
 }).catch(err=>{
     throw err
 })

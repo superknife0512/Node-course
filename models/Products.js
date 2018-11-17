@@ -1,6 +1,32 @@
-// const mongoConnect = require('../utilities/database')
-// const mongodb = require('mongodb');
-// const getDB = mongoConnect.getDatabase;
+const mongoose = require('mongoose');
+
+const Schema = mongoose.Schema;
+
+const productSchema = new Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    des: {
+        type: String,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    },
+    imageUrl: {
+        type: String,
+        required: true
+    },
+    userId:{
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        require: true,
+    }
+})
+
+module.exports = mongoose.model('Products', productSchema);
 
 // const Cart = require('./Cart');
 

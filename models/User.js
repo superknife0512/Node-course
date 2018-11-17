@@ -1,7 +1,71 @@
-// const mongoConnect = require('../utilities/database')
-// const mongodb = require('mongodb');
-// const getDB = mongoConnect.getDatabase;
+const mongoose = require('mongoose');
 
+const schema = mongoose.Schema;
+
+const userSchema = new schema({
+    username: String,
+    email: String,
+    cart:{
+        items:[{
+            productId:{
+                type:  mongoose.Types.ObjectId,
+                ref:'Products',
+                require: true
+            },
+            qty: Number
+        }]
+    }
+})
+
+userSchema.methods.addToCart = function(product){
+
+    let updatedCart = this.cart;
+    let updatedItems = [...updatedCart.items];
+
+    let record = updatedItems.find(item=>{
+        return item.productId.toString() === product._id.toString();
+    })
+
+    if(record){
+        // have a product in cart
+        record.qty += 1
+    } else {
+        updatedItems.push({
+            productId: product._id,
+            qty: 1
+        })
+    }
+
+    updatedCart={
+        items: updatedItems
+    }
+    this.cart = updatedCart
+    this.save();    
+}
+
+userSchema.methods.deleteCartItem = function(itemId){
+    let updatedCart = this.cart;
+    let updatedItems;
+
+    updatedItems = updatedCart.items.filter(item=>{
+        return item._id.toString() !== itemId.toString()
+    })
+
+    updatedCart = {
+        items: updatedItems
+    }
+
+    this.cart = updatedCart;
+    this.save();
+}
+
+userSchema.methods.clearCart = async function(){
+    this.cart={items: []};
+    await this.save()
+}
+
+
+module.exports = mongoose.model('User', userSchema)
 
 // module.exports = class User {
 //     constructor(username, email, cart, userId) {
