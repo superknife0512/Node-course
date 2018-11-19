@@ -1,0 +1,27 @@
+
+.login{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    box-shadow: .5rem .8rem 3rem rgba($color: #000000, $alpha: .2);
+    padding: 3rem;
+    margin-top: 5rem;
+    &__heading{
+        color: $primary-color
+    }
+    &__group{
+        label{
+            display: block;
+            text-transform: capitalize;
+        }
+    }
+    &__form{
+        width: 90%;        
+    }
+}
+
+.wraper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

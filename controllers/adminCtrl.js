@@ -83,11 +83,13 @@ const deleteProduct = async (req, res, next) => {
 
 }
 
+
+
 module.exports = {
     addProduct,
     renderAddProduct,
     renderAdminProduct,
     renderEdit,
     editProduct,
-    deleteProduct
+    deleteProduct,
 }

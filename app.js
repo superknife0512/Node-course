@@ -5,9 +5,10 @@ const mongoose = require('mongoose');
 
 const adminRoute = require('./routes/admin');
 const shopRoute = require('./routes/shop');
+const authRoute = require('./routes/auth');
+
 const render404Page = require('./controllers/404Ctrl');
 const User = require('./models/User');
-
 const app = express();
 
 app.use(bodyParser.urlencoded({
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 })
 
 app.use(adminRoute);
+app.use(authRoute);
 app.use(shopRoute);
 
 //setting using template engine

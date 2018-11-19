@@ -90,8 +90,7 @@ const deleteCart = async (req, res, params) => {
 const addToOrder = async (req, res, next) => {
     try{
         const userData = await req.user.populate('cart.items.productId').execPopulate();
-        console.log(userData.cart.items);
-
+        
         const productInfo = userData.cart.items.map( item=>{
             return {
                 // must access to _doc to pull out all data we need

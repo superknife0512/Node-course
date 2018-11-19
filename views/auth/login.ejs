@@ -1,0 +1,29 @@
+
+<%-include('../includes/header.ejs') %>
+</head>
+<%-include('../includes/navigation.ejs') %>
+<main>
+    <div class="container wraper">
+        <div class="login">
+            <h3 class="login__heading">Login here</h3>
+            <hr>
+            <form action="#" method="POST">
+            
+                <div class="form-group login__group">
+                    <label for="name">name</label>
+                    <input type="text" class="login__form form-control" name="name">
+                </div>
+
+                <div class="form-group login__group">
+                    <label for="name">password</label>
+                    <input type="password" class="login__form form-control" name="pass">
+                </div>
+                <button class="btn btn-danger" type="submit">Submit</button>
+
+            </form>
+
+        </div>
+    </div>
+</main>
+
+<%-include('../includes/end.ejs') %>

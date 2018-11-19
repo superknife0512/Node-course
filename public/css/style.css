@@ -52,7 +52,8 @@ body {
   .header__nav-link:hover {
     color: #f0be62; }
   .header__left {
-    margin-right: auto; }
+    margin-right: auto;
+    display: flex; }
   .header__right {
     display: flex; }
     @media only screen and (max-width: 999px) {
@@ -347,3 +348,23 @@ body {
     margin-right: 2rem; }
   .order__each p {
     margin-bottom: 0rem; }
+
+.login {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  box-shadow: 0.5rem 0.8rem 3rem rgba(0, 0, 0, 0.2);
+  padding: 3rem;
+  margin-top: 5rem; }
+  .login__heading {
+    color: #b93869; }
+  .login__group label {
+    display: block;
+    text-transform: capitalize; }
+  .login__form {
+    width: 90%; }
+
+.wraper {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
