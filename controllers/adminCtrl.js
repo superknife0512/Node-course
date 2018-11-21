@@ -9,9 +9,9 @@ const addProduct = (req, res) => {
 
     const product = new Product({title, imageUrl, price, des, userId});
     product.save().then(result=>{
-        console.log(result);
+        // console.log(result);
     }).catch(err=>{
-        throw err;
+        console.log('err');;
     })
     res.redirect('/');
 }
@@ -32,7 +32,7 @@ const renderAdminProduct = (req, res, next) => {
             path: '/admin-product',
         });
     }).catch(err => {
-        console.log(err);
+        console.log('err');
     })
 }
 
@@ -53,7 +53,7 @@ const renderEdit = (req, res, next) => {
             product
         })
     }).catch(err => {
-        console.log(err);
+        console.log('err');
     })
 }
 

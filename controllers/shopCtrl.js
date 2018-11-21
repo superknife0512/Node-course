@@ -12,7 +12,7 @@ const renderProducts = (req, res, next) => {
             path: '/'
         });
     }).catch(err => {
-        console.log(err);
+        console.log('err1');
     });
 }
 
@@ -31,7 +31,7 @@ const renderCart = async (req, res, next) => {
             totalAmount: totalAmount.toFixed(2),
         })
     } catch(err){
-        console.log(err);
+        console.log('err2');
     }
 }
 
@@ -60,7 +60,7 @@ const renderDetail = (req, res, next) => {
             })
         }
     }).catch(err => {
-        console.log(err);
+        console.log('err3');
     })
 }
 
@@ -73,7 +73,7 @@ const addToCart = async (req, res, next) => {
         console.log('Done');
         res.redirect('/')
     } catch(err){
-        console.log(err);
+        console.log('err4');
     }
 }
 
@@ -83,7 +83,7 @@ const deleteCart = async (req, res, params) => {
         await req.user.deleteCartItem(itemId);
         res.redirect('/cart');
     } catch (err){
-        console.log(err);
+        console.log('err5');
     }
 }
 
@@ -112,7 +112,7 @@ const addToOrder = async (req, res, next) => {
         console.log('Done!');
         res.redirect('/order')
     }catch(err){
-        console.log(err);
+        console.log('err6');
     }
 }
 
