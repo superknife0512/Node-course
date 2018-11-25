@@ -1,4 +1,7 @@
 <form action="/cart" method="POST">                
-    <button type="submit" id="addToCart" class="btn btn-warning">add to card</button>
+    <button type="submit" id="addToCart" class="btn btn-warning"
+            <%= isLogin ? '' : 'disabled' %> >add to card</button>
     <input type="hidden" name="productId" value="<%= product._id %>">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
 </form>

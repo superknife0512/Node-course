@@ -21,6 +21,7 @@ const renderAddProduct = (req, res) => {
         title: 'add Product',
         path: '/add-product',
         editMode: false,
+        isLogin: req.session.isLogin
     })
 }
 
@@ -30,6 +31,7 @@ const renderAdminProduct = (req, res, next) => {
             product,
             title: 'Admin Product',
             path: '/admin-product',
+            isLogin: req.session.isLogin
         });
     }).catch(err => {
         console.log('err');
@@ -50,7 +52,8 @@ const renderEdit = (req, res, next) => {
             title: 'Edit Page',
             path: '/edit-product',
             editMode,
-            product
+            product,
+            isLogin: req.session.isLogin
         })
     }).catch(err => {
         console.log('err');

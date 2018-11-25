@@ -28,7 +28,9 @@
                     <div class="product__navigation">                    
                         <!--<a class="product__cart-detail" href="/<%= product.seoTitle %>.<%= product.id %>">Detail</a>-->
                         <a class="product__cart-detail" href="/<%= product._id %>">Detail</a>
-                        <%-include('../includes/add-to-cart.ejs',{product}) %>
+                        <% if(isLogin) { %>
+                            <%-include('../includes/add-to-cart.ejs',{product}) %>
+                        <% } %>
                     </div>
                 </div>
             </div>

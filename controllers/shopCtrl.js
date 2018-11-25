@@ -9,36 +9,19 @@ const renderProducts = (req, res, next) => {
         res.render('shop/shop-list', {
             products,
             title: 'Online shop',
-            path: '/'
+            path: '/',
         });
     }).catch(err => {
         console.log('err1');
     });
 }
 
-const renderCart = async (req, res, next) => {
-    try{
-        let totalAmount = 0;
-        const cartProducts = await req.user.populate('cart.items.productId').execPopulate();
-        cartProducts.cart.items.forEach(item=>{
-            totalAmount += item.qty * item.productId.price;
-        })
-        // console.log(cartProducts.cart.items);
-        res.render('shop/cart',{
-            items: cartProducts.cart.items,
-            path:'/cart',
-            title: 'Your Cart',
-            totalAmount: totalAmount.toFixed(2),
-        })
-    } catch(err){
-        console.log('err2');
-    }
-}
+
 
 const renderIndexPro = (req, res, next) => {
     res.render('shop/index', {
         title: 'Index Product',
-        path: '/index-product'
+        path: '/index-product',
     })
 }
 
@@ -49,49 +32,50 @@ const renderIndexPro = (req, res, next) => {
 //     })
 // }
 
-const renderDetail = (req, res, next) => {
-    const prodId = req.params.productId;
-    Product.findById(prodId).then(product => {
-        if (product) {
-            return res.render('shop/product-detail', {
-                product,
-                title: product.title,
-                path: '/'
-            })
-        }
-    }).catch(err => {
-        console.log('err3');
-    })
+const renderDetail = async (req, res, next) => {
+    try{
+
+        const prodId = req.params.productId;
+        const product = await Product.findById(prodId);
+        res.render('shop/product-detail', {
+            product,
+            title: product.title,
+            path: '/',
+    
+        })
+    } catch(err){
+        console.log('err2');
+    }
 }
 
 const addToCart = async (req, res, next) => {
-    try{
+    try {
 
         const prodId = req.body.productId;
         const product = await Product.findById(prodId);
         await req.user.addToCart(product);
         console.log('Done');
         res.redirect('/')
-    } catch(err){
+    } catch (err) {
         console.log('err4');
     }
 }
 
 const deleteCart = async (req, res, params) => {
-    try{
+    try {
         const itemId = req.body.itemId;
         await req.user.deleteCartItem(itemId);
         res.redirect('/cart');
-    } catch (err){
+    } catch (err) {
         console.log('err5');
     }
 }
 
 const addToOrder = async (req, res, next) => {
-    try{
+    try {
         const userData = await req.user.populate('cart.items.productId').execPopulate();
-        
-        const productInfo = userData.cart.items.map( item=>{
+
+        const productInfo = userData.cart.items.map(item => {
             return {
                 // must access to _doc to pull out all data we need
                 product: item.productId._doc,
@@ -101,8 +85,7 @@ const addToOrder = async (req, res, next) => {
 
         const order = new Order({
             products: productInfo,
-            user:{
-                username: req.user.username,
+            user: {
                 userId: req.user
             }
         })
@@ -111,17 +94,40 @@ const addToOrder = async (req, res, next) => {
         await req.user.clearCart();
         console.log('Done!');
         res.redirect('/order')
-    }catch(err){
+    } catch (err) {
         console.log('err6');
     }
 }
 
+const renderCart = async (req, res, next) => {
+    try {
+        const userData = await req.user.populate('cart.items.productId').execPopulate();
+        const userItems = userData.cart.items;
+        let totalPrice = 0;
+        userItems.forEach(item => {
+            totalPrice += item.productId.price * item.qty;
+        });
+
+        res.render('shop/cart', {
+            title: 'Cart',
+            path: '/cart',
+            totalAmount: totalPrice.toFixed(2),
+            items: userItems
+        })
+
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 const renderOrder = async (req, res, next) => {
-    const orders = await Order.find({'user.userId':req.user._id});
+    const orders = await Order.find({
+        'user.userId': req.user._id
+    });
     res.render('shop/order', {
-        path:'/order',
+        path: '/order',
         orders: orders,
-        title: ' Your order '
+        title: ' Your order ',
     })
 }
 

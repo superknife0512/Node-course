@@ -27,6 +27,7 @@ body{
     }
     &__nav-item:not(:last-child){
         margin-right: 3rem;
+        
         @media only screen and (max-width: 999px){
             margin-right: 0 ;
             margin-bottom: 1rem;
@@ -46,22 +47,32 @@ body{
     &__left {
         margin-right: auto;
         display: flex;
+        
+        @media only screen and (max-width: 999px){
+            flex-direction: column;
+        }
     }
     &__right{
         display: flex;
-        @media only screen and (max-width: 999px){
-            flex-direction: column;
-            align-items: flex-end;
+        align-items: center;
+        li{
+            @media only screen and (max-width: 999px){
+                margin-bottom: 0 !important;
+                &:not(:last-child){
+                    margin-right: 2rem;
+                }
+            }
         }
     }
     &__right-menu{
         display: flex;
+        align-items: center;
 
         @media only screen and (max-width: 999px){
             display: none;
             flex-direction: column;
-            margin-top: 20px;
-            align-items: flex-end;
+            margin-top: 1.2rem;
+            align-items: flex-start;
         }
     }
     &__responsive{

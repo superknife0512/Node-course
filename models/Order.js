@@ -10,7 +10,6 @@ const orderSchema = new schema({
         }
     ],
     user:{
-        username: String,
         userId: mongoose.Types.ObjectId
     }
 })

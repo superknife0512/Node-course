@@ -1,23 +1,20 @@
-
 <%-include('../includes/header.ejs') %>
 </head>
 <%-include('../includes/navigation.ejs') %>
 <main>
-    <div class="container wraper">        
+    <div class="container wraper">
         <div class="login">
             <h3 class="login__heading">Login here</h3>
             <hr>
-
             <% if(errorMess !='' && errorMess != undefined) { %>
                 <div class="error-mess">                   
                     <h4> <i class="fas fa-exclamation-circle"></i> <%= errorMess %></h4>
                 </div>
             <% } %>
-
-            <form action="/login" method="POST">
+            <form action="/signup" method="POST">
             
                 <div class="form-group login__group">
-                    <label for="email">email</label>
+                    <label for="name">email</label>
                     <input type="email" class="login__form form-control" name="email">
                 </div>
 
@@ -25,12 +22,13 @@
                     <label for="name">password</label>
                     <input type="password" class="login__form form-control" name="pass">
                 </div>
-                <div class="login__btn">                
-                    <button class="btn btn-danger" type="submit">Submit</button>
-                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                    <a href="/reset">Forgot your password?</a>
-                </div>
 
+                 <div class="form-group login__group">
+                    <label for="name">Confirm password</label>
+                    <input type="password" class="login__form form-control" name="confirm_pass">
+                </div>
+                <button class="btn btn-danger" type="submit">Signup</button>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             </form>
 
         </div>

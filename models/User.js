@@ -3,14 +3,14 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 const userSchema = new schema({
-    username: String,
     email: String,
+    password: String,
     cart:{
         items:[{
             productId:{
                 type:  mongoose.Types.ObjectId,
                 ref:'Products',
-                require: true
+                required: true
             },
             qty: Number
         }]

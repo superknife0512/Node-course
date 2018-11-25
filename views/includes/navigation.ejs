@@ -3,36 +3,63 @@
             <ul class="header__nav-list container">                  
                 
                 <div class="header__left">
-                    <li class="header__nav-item <%= path==='/' ? 'active' : '' %>"> 
-                        <a href="/" class="header__nav-link">shop</a>
-                    </li> 
+                
+                    <div class="header__responsive">
+                        <i class="fas fa-bars header__responsive-icon"></i>
+                    </div> 
 
-                    <li class="header__nav-item <%= path==='/index-product' ? 'active' : '' %>"> 
-                        <a href="/index-product" class="header__nav-link">Products</a>
-                    </li>
-                    </li>
+                    <div class="header__right-menu">
                     
-                    <li class="header__nav-item <%= path==='/cart' ? 'active' : '' %>"> 
-                        <a href="/cart" class="header__nav-link">Cart</a>
-                    </li>
-                    <li class="header__nav-item <%= path==='/order' ? 'active' : '' %>"> 
-                        <a href="/order" class="header__nav-link">Order</a>
-                    </li>
-                    
+                        <li class="header__nav-item <%= path==='/' ? 'active' : '' %>"> 
+                            <a href="/" class="header__nav-link">shop</a>
+                        </li> 
+
+                        <li class="header__nav-item <%= path==='/index-product' ? 'active' : '' %>"> 
+                            <a href="/index-product" class="header__nav-link">Products</a>
+                        </li>
+                        </li>
+                        
+                        <% if(isLogin) { %>
+
+                            <li class="header__nav-item <%= path==='/cart' ? 'active' : '' %>"> 
+                                <a href="/cart" class="header__nav-link">Cart</a>
+                            </li>
+                            <li class="header__nav-item <%= path==='/order' ? 'active' : '' %>"> 
+                                <a href="/order" class="header__nav-link">Order</a>
+                            </li>
+
+                            <li class="header__nav-item <%= path==='/add-product' ? 'active' : '' %>">
+                                <a href="/add-product" class="header__nav-link">add product</a>
+                            </li>
+                            <li class="header__nav-item <%= path==='/admin-product' ? 'active' : '' %>">
+                                <a href="/admin-product" class="header__nav-link">admin products</a>
+                            </li>
+
+                        <% } %>
+                    </div>
 
                 </div>           
                 
                 <div class="header__right">
-                    <div class="header__responsive">
-                        <i class="fas fa-bars header__responsive-icon"></i>
-                    </div>
-                    
-                    <div class="header__right-menu">  
+
+                        <% if(!isLogin) { %>
+
                         <li class="header__nav-item <%= path==='/login' ? 'active' : '' %>"> 
                             <a href="/login" class="header__nav-link">Login</a>
-                        </li>                     
+                        </li>   
+                        <li class="header__nav-item "> 
+                            <a href="/sign-up" class="btn btn-light <%= path==='/sign-up' ? 'active' : '' %>">sign up</a>
+                        </li>  
 
-                    </div>
+                        <% } else { %>
+                         <li class="header__nav-item"> 
+                            <form action="/logout" method="POST">
+                                <button type="submit" class="btn btn-warning">Log out</button>
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            </form>
+                         </li>                   
+                        <% } %>
+                    
                 </div>
                          
 
