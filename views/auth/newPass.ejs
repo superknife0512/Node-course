@@ -1,0 +1,32 @@
+<%-include('../includes/header.ejs') %>
+</head>
+<%-include('../includes/navigation.ejs') %>
+<main>
+    <div class="container wraper">
+        <div class="login">
+            <h3 class="login__heading">Enter your new password</h3>
+            <hr>
+
+            <% if(errorMess !='' && errorMess != undefined) { %>
+                <div class="error-mess">                   
+                    <h4> <i class="fas fa-exclamation-circle"></i> <%= errorMess %></h4>
+                </div>
+            <% } %>
+            <form action="/new-password" method="POST">
+            
+                <div class="form-group login__group">
+                    <label for="name">Your password</label>
+                    <input type="password" class="login__form form-control" name="password">
+                </div>
+               
+                <button class="btn btn-danger" type="submit">New password</button>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <input type="hidden" name="userId" value="<%= userId %>">
+                <input type="hidden" name="token" value="<%= token %>">
+            </form>
+
+        </div>
+    </div>
+</main>
+
+<%-include('../includes/end.ejs') %>

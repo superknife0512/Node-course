@@ -5,6 +5,8 @@ const schema = mongoose.Schema;
 const userSchema = new schema({
     email: String,
     password: String,
+    resetToken: String,
+    tokenExpiration: Date,
     cart:{
         items:[{
             productId:{

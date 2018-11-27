@@ -1,15 +1,33 @@
 const Product = require('../models/Products');
+const { validationResult } = require('express-validator/check')
 
 const addProduct = (req, res) => {
     const title = req.body.title;
     const imageUrl = req.body.imageUrl;
     const price = req.body.price;
     const des = req.body.des;
-    const userId = req.user
+    const userId = req.user;
+    const errors = validationResult(req);
+
+    if(!errors.isEmpty()){
+        return res.status(422).render('admin/edit-product',{
+            title: 'add Product',
+            path: '/add-product',
+            editMode: false,
+            hasError: true,
+            errorMess: errors.array()[0].msg,
+            product:{
+                title,
+                imageUrl,
+                price,
+                des
+            }
+        })
+    }
 
     const product = new Product({title, imageUrl, price, des, userId});
     product.save().then(result=>{
-        // console.log(result);
+        console.log('Has been added');
     }).catch(err=>{
         console.log('err');;
     })
@@ -21,12 +39,14 @@ const renderAddProduct = (req, res) => {
         title: 'add Product',
         path: '/add-product',
         editMode: false,
-        isLogin: req.session.isLogin
+        hasError: false,
+        isLogin: req.session.isLogin,
+        errorMess: '',
     })
 }
 
 const renderAdminProduct = (req, res, next) => {
-    Product.find().then(product => {
+    Product.find({userId: req.user._id}).then(product => {
         res.render('admin/adminProducts', {
             product,
             title: 'Admin Product',
@@ -53,7 +73,8 @@ const renderEdit = (req, res, next) => {
             path: '/edit-product',
             editMode,
             product,
-            isLogin: req.session.isLogin
+            isLogin: req.session.isLogin,
+            errorMess:''
         })
     }).catch(err => {
         console.log('err');
@@ -68,6 +89,9 @@ const editProduct = async (req, res, next) => {
     const updatedImageUrl = req.body.imageUrl;
 
     const product = await Product.findById(prodId);
+    if(product.userId.toString() !== req.user._id.toString()){
+        return res.redirect('/')
+    }
     product.title = updatedTitle;
     product.price = updatedPrice;
     product.des = updatedDes;
@@ -79,10 +103,15 @@ const editProduct = async (req, res, next) => {
 }
 
 const deleteProduct = async (req, res, next) => {
-    const prodId = req.body.productId;
-    await Product.findByIdAndRemove(prodId);
-    console.log('Done');
-    res.redirect('/admin-product')
+    try{
+
+        const prodId = req.body.productId;
+        await Product.deleteOne({_id: prodId, userId: req.user._id});
+        console.log('Done');
+        res.redirect('/admin-product')
+    } catch(err){
+        res.redirect('/admin-product')
+    }
 
 }
 

@@ -36,6 +36,7 @@ app.use(csrfProtection);
 
 // serving static file
 app.use('/edit-product', express.static(path.join(__dirname, 'public')))
+app.use('/reset', express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use((req,res,next)=>{
