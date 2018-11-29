@@ -12,7 +12,9 @@ route.post('/cart', protectAuth, shopController.addToCart)
 // // route.get('/check-out', shopController.renderCheckOut)
 route.get('/order', protectAuth, shopController.renderOrder)
 route.post('/order', protectAuth, shopController.addToOrder)
+route.get('/order/:orderId', protectAuth, shopController.getInvoice)
 route.post('/delete-cart', protectAuth, shopController.deleteCart)
 route.get('/:productId', shopController.renderDetail)
+
 
 module.exports = route;

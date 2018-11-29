@@ -12,8 +12,7 @@ route.post('/add-product',[
         .withMessage('Title should contain from 5 to 15 characters')
         .isLowercase()
         .withMessage('Please enter all lower case character in title!'),
-    body('imageUrl', 'please enter an valid url!')
-        .isURL(),
+    
     body('price', 'please enter a valid price. Ex: 18.99')
         .isFloat(),
     body('des')
@@ -31,8 +30,6 @@ route.post('/edit-product',
         .withMessage('Title should contain from 5 to 15 characters')
         .isLowercase()
         .withMessage('Please enter all lower case character in title!'),
-    body('imageUrl', 'please enter an valid url!')
-        .isURL(),
     body('price', 'please enter a valid price. Ex: 18.99')
         .isFloat(),
     body('des')

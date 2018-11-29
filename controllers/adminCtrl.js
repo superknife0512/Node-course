@@ -1,37 +1,48 @@
 const Product = require('../models/Products');
-const { validationResult } = require('express-validator/check')
+const { validationResult } = require('express-validator/check');
+const mongoose = require('mongoose');
 
-const addProduct = (req, res) => {
+const addProduct = (req, res,next) => {
+    
     const title = req.body.title;
-    const imageUrl = req.body.imageUrl;
+    const image = req.file;
     const price = req.body.price;
     const des = req.body.des;
     const userId = req.user;
     const errors = validationResult(req);
 
-    if(!errors.isEmpty()){
+    const renderError = (message = errors.array()[0].msg)=>{
         return res.status(422).render('admin/edit-product',{
             title: 'add Product',
             path: '/add-product',
             editMode: false,
             hasError: true,
-            errorMess: errors.array()[0].msg,
+            errorMess: message,
             product:{
                 title,
-                imageUrl,
                 price,
                 des
             }
         })
     }
 
-    const product = new Product({title, imageUrl, price, des, userId});
+    if(!image){
+        return renderError('Please choose a valid image!')
+    }
+
+    const imagePath = image.path;
+
+    if(!errors.isEmpty()){
+        return renderError();
+    }
+
+    const product = new Product({ title, imageUrl: imagePath, price, des, userId});
     product.save().then(result=>{
         console.log('Has been added');
     }).catch(err=>{
-        console.log('err');;
+        console.log('can work')
     })
-    res.redirect('/');
+    res.redirect('/admin-product');
 }
 
 const renderAddProduct = (req, res) => {
@@ -51,7 +62,6 @@ const renderAdminProduct = (req, res, next) => {
             product,
             title: 'Admin Product',
             path: '/admin-product',
-            isLogin: req.session.isLogin
         });
     }).catch(err => {
         console.log('err');
@@ -73,20 +83,20 @@ const renderEdit = (req, res, next) => {
             path: '/edit-product',
             editMode,
             product,
-            isLogin: req.session.isLogin,
             errorMess:''
         })
     }).catch(err => {
-        console.log('err');
+        console.log(err);
     })
 }
 
 const editProduct = async (req, res, next) => {
+    const imageFile = req.file;
+
     const prodId = req.body.productId;
     const updatedTitle = req.body.title;
     const updatedPrice = req.body.price;
     const updatedDes = req.body.des;
-    const updatedImageUrl = req.body.imageUrl;
 
     const product = await Product.findById(prodId);
     if(product.userId.toString() !== req.user._id.toString()){
@@ -95,7 +105,10 @@ const editProduct = async (req, res, next) => {
     product.title = updatedTitle;
     product.price = updatedPrice;
     product.des = updatedDes;
-    product.imageUrl = updatedImageUrl;
+
+    if(imageFile){
+        product.imageUrl = imageFile.path;
+    }
 
     await product.save();
 

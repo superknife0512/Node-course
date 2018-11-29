@@ -2,6 +2,10 @@ const Product = require('../models/Products');
 const Order = require('../models/Order');
 const User = require('../models/User');
 
+const fs = require('fs');
+const path = require('path');
+const PDFDocument = require('pdfkit')
+
 
 const renderProducts = (req, res, next) => {
     Product.find().then(products => {
@@ -131,6 +135,48 @@ const renderOrder = async (req, res, next) => {
     })
 }
 
+const getInvoice = async (req,res,next)=>{
+    const invoiceId = req.params.orderId;
+    const invoicePath = path.join(__dirname, '..', 'data', 'invoices', `invoice-${invoiceId}.pdf`);
+    const userInvoice = await Order.findOne({_id: invoiceId, 'user.userId': req.user._id});
+
+    if(userInvoice){
+
+        const doc = new PDFDocument;
+
+        res.setHeader('content-type', 'application/pdf');
+        
+        doc.pipe(fs.createWriteStream(invoicePath));
+        doc.pipe(res);
+
+        // set title 
+        doc.fontSize(24).text(`invoice-#${invoiceId}`);
+        doc.fontSize(20).text('---------------------------------------');
+        let totalPrice = 0;
+        //products
+        userInvoice.products.forEach(prod=>{
+            totalPrice += prod.qty * prod.product.price
+            doc.fontSize(15).text(`${prod.product.title}: ${prod.qty}*$${prod.product.price}`)
+            doc.text('---', {lineGap: 10})
+        })
+
+        doc.fontSize(20).text(`Total amount: $${totalPrice.toFixed(2)}`).fillColor('red');
+        // fs.readFile(invoicePath, (err,data)=>{
+        //     if(!err){
+        //         res.setHeader('content-type', 'application/pdf');
+        //         res.send(data)
+        //     } else { 
+        //         console.log(err);
+        //     }
+        // })
+        // must be recommend *************************
+        // const file = fs.createReadStream(invoicePath);
+        // file.pipe(res)
+        doc.end();
+    } else {
+        res.redirect('/order')
+    }
+}
 
 module.exports = {
     renderProducts,
@@ -141,5 +187,6 @@ module.exports = {
     renderDetail,
     renderCart,
     addToCart,
-    deleteCart
+    deleteCart,
+    getInvoice
 }

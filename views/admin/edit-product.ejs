@@ -8,7 +8,7 @@
     <main>
         <div class="container text-center">
         
-            <form action="<%= editMode ? '/edit-product' : '/add-product' %>" method="POST" class="form" >
+            <form action="<%= editMode ? '/edit-product' : '/add-product' %>" method="POST" class="form" enctype="multipart/form-data">
                 <h3> <%= editMode? 'Update your product' : 'Add your new Product' %></h3>
 
                 <% if(errorMess !='' && errorMess != undefined) { %>
@@ -24,6 +24,7 @@
                             placeholder="Title"
                             value="<%=editMode || hasError ? product.title : '' %>">
                 </div>
+                <!--
                 <div class="form__control">
                     <input type="text" 
                             name="imageUrl" 
@@ -31,6 +32,15 @@
                             placeholder="Image Url"
                             value="<%=editMode || hasError ? product.imageUrl : '' %>">
                 </div>
+                -->
+                <div class="form__control">
+                    <input type="file" 
+                    name="image" 
+                    class="form__product"
+                    id="image">
+                <!-- <label for="image" class="form__picker">Pick a file</label>
+                </div> -->
+
                 <div class="form__control">
                     <input type="number" 
                             step="0.01"
