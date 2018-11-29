@@ -4,23 +4,33 @@ const User = require('../models/User');
 
 const fs = require('fs');
 const path = require('path');
-const PDFDocument = require('pdfkit')
+const PDFDocument = require('pdfkit');
+
+const RES_PER_PAGE = 2;
 
 
-const renderProducts = (req, res, next) => {
-    Product.find().then(products => {
-        // console.log(products);
-        res.render('shop/shop-list', {
-            products,
-            title: 'Online shop',
-            path: '/',
-        });
-    }).catch(err => {
-        console.log('err1');
-    });
+const renderProducts = async (req, res, next) => {
+    try{
+        const page = +req.query.page || 1;
+        const numProducts =await Product.find().countDocuments();
+        const numPages = Math.ceil(numProducts/RES_PER_PAGE);
+        const products =await Product.find().skip((page-1)*RES_PER_PAGE).limit(RES_PER_PAGE);
+    
+            res.render('shop/shop-list', {
+                products,
+                title: 'Online shop',
+                path: '/',
+                numPages,
+                currentPage: page,
+                previousPage: page - 1 < 0 ? false : page-1,
+                nextPage: page + 1 > numPages? false : page+1,
+            })    
+
+    } catch(err) {
+        console.log(err);
+    }
+    
 }
-
-
 
 const renderIndexPro = (req, res, next) => {
     res.render('shop/index', {
@@ -143,7 +153,7 @@ const getInvoice = async (req,res,next)=>{
     if(userInvoice){
 
         const doc = new PDFDocument;
-
+        
         res.setHeader('content-type', 'application/pdf');
         
         doc.pipe(fs.createWriteStream(invoicePath));

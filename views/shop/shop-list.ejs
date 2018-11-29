@@ -33,10 +33,26 @@
                         <% } %>
                     </div>
                 </div>
-            </div>
 
-            <% }) %>
+            </div>                
+                <% }) %>
+
         </div>
+        <section class="container">        
+            <div class="pagination">
+            
+                <% if(previousPage) { %>
+                    <a href="?page=<%= 1 %>"><i class="fas fa-angle-double-left"></i></a>
+                    <a href="?page=<%= previousPage %>"><%= previousPage %></a> <!-- previous page -->
+                <% } %>
+                <a href="/?page=<%= currentPage %> " class="active"><%= currentPage %></a> <!-- current page -->
+                <% if(nextPage) { %>
+                    <a href="?page=<%= nextPage %> "><%= nextPage %></a> <!-- previous page -->            
+                    <a href="?page=<%= numPages %>"><i class="fas fa-angle-double-right"></i></a>
+                <% } %>
+
+            </div>
+        </section>
 
         <% } else { %>
         

@@ -383,3 +383,23 @@ body {
   font-size: 1.2rem;
   color: #ff6000;
   margin: 1rem 0; }
+
+.pagination {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center; }
+  .pagination a {
+    margin-right: .7rem; }
+    .pagination a:visited, .pagination a:link {
+      text-decoration: none;
+      padding: 5px 11px;
+      border: 1px solid #b93869;
+      border-radius: 3px;
+      transition: all .3s;
+      color: #b93869; }
+    .pagination a:hover, .pagination a:active {
+      color: white;
+      background-color: #b93869; }
+  .pagination a.active {
+    color: white;
+    background-color: #b93869; }

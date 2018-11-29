@@ -84,8 +84,6 @@ app.use( async (req,res,next)=>{
     }
 })
 
-
-
 app.use(adminRoute);
 app.use(authRoute);
 app.use(shopRoute);
@@ -97,7 +95,7 @@ app.set('views', 'views');
 // adding 404 brain not found
 app.use(render404Page)
 
-mongoose.connect(MONGODB_URI)
+mongoose.connect(MONGODB_URI,{ useNewUrlParser: true })
     .then(()=>{
     app.listen(3000);
     

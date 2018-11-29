@@ -1,0 +1,28 @@
+
+.pagination{
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+
+    a{
+        margin-right: .7rem;
+        &:visited, &:link{
+            text-decoration: none;
+            padding: 5px 11px;
+            border: 1px solid $primary-color;
+            border-radius: 3px;
+            transition: all .3s;
+            color: $primary-color
+        }
+
+        &:hover, &:active{
+            color: white;
+            background-color: $primary-color;
+        }
+    }
+
+    a.active{
+        color: white;
+        background-color: $primary-color;
+    }
+}

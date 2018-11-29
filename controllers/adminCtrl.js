@@ -1,6 +1,7 @@
 const Product = require('../models/Products');
 const { validationResult } = require('express-validator/check');
 const mongoose = require('mongoose');
+const deletFile = require('../ultil/deleteFile');
 
 const addProduct = (req, res,next) => {
     
@@ -107,6 +108,7 @@ const editProduct = async (req, res, next) => {
     product.des = updatedDes;
 
     if(imageFile){
+        deletFile(product.imageUrl); // remove the old one
         product.imageUrl = imageFile.path;
     }
 
@@ -119,6 +121,10 @@ const deleteProduct = async (req, res, next) => {
     try{
 
         const prodId = req.body.productId;
+        // get the product form it id
+        const product = await Product.findOne({_id: prodId});
+        deletFile(product.imageUrl);
+
         await Product.deleteOne({_id: prodId, userId: req.user._id});
         console.log('Done');
         res.redirect('/admin-product')
